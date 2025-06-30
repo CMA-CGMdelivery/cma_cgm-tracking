@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CMA CGM Tracking Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    header img {
+      height: 50px;
+      vertical-align: middle;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #003366;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      padding: 12px;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 20px;
+      background-color: #0055a5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003f7d;
+    }
+    .btn-print {
+      float: right;
+      margin-top: -40px;
+      margin-bottom: 20px;
+      background-color: #0077c8;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 16px;
+      border: 1px solid #003366;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border: 1px solid #003366;
+    }
+    th {
+      background-color: #f0f5fa;
+      color: #003366;
+      width: 30%;
+    }
+    .horizontal-package-table th, .horizontal-package-table td {
+      text-align: center;
+    }
+    .horizontal-package-table th {
+      background-color: #f0f5fa;
+      color: #003366;
+    }
+    .progress-bar {
+      margin-top: 30px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 22px;
+      background: linear-gradient(90deg, #0055a5 0%, #0077c8 100%);
+      width: 70%;
+      text-align: center;
+      color: white;
+      line-height: 22px;
+      font-weight: bold;
+    }
+    iframe {
+      width: 100%;
+      height: 450px;
+      margin-top: 30px;
+      border-radius: 12px;
+      border: none;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 20px;
+      color: #003366;
+      font-weight: bold;
+      padding: 20px;
+      border-top: 2px solid #ccc;
+    }
+    h4 i {
+      margin-right: 8px;
+      color: #0055a5;
+    }
+    @media screen and (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .btn-print {
+        float: none;
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CMA_CGM_logo.svg/2560px-CMA_CGM_logo.svg.png" alt="CMA CGM Logo" />
+    <h1>Tracking Portal</h1>
+  </header>
+
+  <div class="container">
+    <h2>Track Your Package</h2>
+    <input type="text" id="trackingInput" placeholder="Enter your tracking code">
+    <button onclick="track()">Track</button>
+
+    <div id="result" style="display:none;">
+      <button class="btn-print" onclick="window.print()">Print</button>
+      <h3>Tracking Information</h3>
+
+      <h4><i class="fas fa-paper-plane"></i>Sender Details</h4>
+      <table>
+        <tr><th>Tracking Code</th><td id="codeDisplay"></td></tr>
+        <tr><th>Name</th><td>Min Jun</td></tr>
+        <tr><th>Address</th><td>London, UK 🇬🇧</td></tr>
+        <tr><th>Email</th><td>mjun2327@gmail.com</td></tr>
+        <tr><th>Phone</th><td>+44 7985 293148</td></tr>
+      </table>
+
+      <h4><i class="fas fa-location-dot"></i>Receiver Details</h4>
+      <table>
+        <tr><th>Name</th><td>Katerin Zerpa</td></tr>
+        <tr><th>Address</th><td>Los Samanes Area, San Rafael Street, Valencia, Venezuela 🇻🇪</td></tr>
+        <tr><th>Email</th><td>katerinzerpa65@gmail.com</td></tr>
+        <tr><th>Phone</th><td>+58 412-4151500</td></tr>
+      </table>
+
+      <h3>Package Details</h3>
+      <table class="horizontal-package-table">
+        <tr><th>Weight</th><th>Destination</th><th>Mode</th><th>Delivery Date</th></tr>
+        <tr><td>23kg</td><td>Venezuela</td><td>Freight</td><td>1st July 2025</td></tr>
+      </table>
+
+      <h3>Package Status</h3>
+      <div class="progress-bar">
+        <div class="progress">In Customs (70%)</div>
+      </div>
+
+      <h3>Route Map (Simón Bolívar Airport ➝ Receiver Address)</h3>
+      <iframe 
+        src="https://www.google.com/maps?q=Sim%C3%B3n+Bol%C3%ADvar+Airport+Venezuela+to+Los+Samanes+Valencia+Venezuela&output=embed"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+
+      <div class="footer">
+        THANKS FOR USING CMA-CGM
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const realTrackingCode = "CMA2025VX7823VE";
+
+    function track() {
+      const input = document.getElementById("trackingInput").value.trim().toUpperCase();
+      const result = document.getElementById("result");
+      const codeDisplay = document.getElementById("codeDisplay");
+
+      if (input === realTrackingCode) {
+        codeDisplay.textContent = input;
+        result.style.display = "block";
+      } else {
+        alert("Invalid tracking code. Please try again.");
+        result.style.display = "none";
+      }
+    }
+
+    window.onload = () => {
+      document.getElementById("trackingInput").value = realTrackingCode;
+    };
+  </script>
+</body>
+</html>
